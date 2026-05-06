@@ -30,7 +30,7 @@ def get_region_prices(region):
     for sku, product in products.items():
         attr = product.get("attributes", {})
 
-        # ✅ EXACT AWS UI FILTERS
+        #  EXACT AWS UI FILTERS
         if (
             attr.get("operatingSystem") != "Linux"
             or attr.get("tenancy") != "Shared"
@@ -61,7 +61,7 @@ with h5py.File("aws_final_fast.h5", "w") as hdf:
 
         ec2 = boto3.client("ec2", region_name=region)
 
-        # ⚡ Load pricing for only this region
+        #  Load pricing for only this region
         price_map = get_region_prices(region)
 
         instances, vcpus, memories, prices = [], [], [], []
@@ -78,7 +78,7 @@ with h5py.File("aws_final_fast.h5", "w") as hdf:
                 vcpus.append(inst["VCpuInfo"]["DefaultVCpus"])
                 memories.append(inst["MemoryInfo"]["SizeInMiB"] / 1024)
 
-                # ⚡ O(1) lookup
+                #  O(1) lookup
                 prices.append(price_map.get(itype, 0.0))
 
             next_token = response.get("NextToken")
@@ -91,6 +91,6 @@ with h5py.File("aws_final_fast.h5", "w") as hdf:
         grp.create_dataset("memory", data=memories)
         grp.create_dataset("pricing", data=prices)
 
-        print(f"✅ {region}: {len(instances)} instances")
+        print(f" {region}: {len(instances)} instances")
 
-print("\n🎉 DONE (FAST + EXACT + STABLE)")
+print("\n DONE ")
