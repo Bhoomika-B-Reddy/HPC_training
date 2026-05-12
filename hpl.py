@@ -16,6 +16,11 @@ MPI = {
         "run":    "/usr/bin/mpirun",
         "flags":  "-np {np} --bind-to none --map-by slot",
     },
+    "aocc": {
+        "dir":   "/usr/lib/x86_64-linux-gnu/openmpi",
+        "run":   "/usr/bin/mpirun",
+        "flags": "-np {np} --bind-to none --map-by slot",
+    },
 }
 
 def mpi_inc(c):  d = MPI[c]["dir"]; return f"-I{d}/include"
