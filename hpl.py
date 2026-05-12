@@ -6,10 +6,7 @@ import subprocess
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from slurm import write_script, sbatch_submit
 
-HPL_URL     = "https://netlib.org/benchmark/hpl/hpl-2.3.tar.gz"
-HPL_TAR     = "hpl-2.3.tar.gz"
-HPL_DIR     = "hpl-2.3"
-HPL_VERSION = "2.3"
+
 
 
 # ─────────────────────────────────────────────────────────────
@@ -62,14 +59,7 @@ def calc_hpl_params(avail_mb, np):
 
 
 # ─────────────────────────────────────────────────────────────
-# ARCHIVER SELECTION
-# ─────────────────────────────────────────────────────────────
 
-def get_archiver(compiler_name):
-    if compiler_name == "icc":
-        return "xiar"
-    else:
-        return "llvm-ar"
 
 
 # ─────────────────────────────────────────────────────────────
